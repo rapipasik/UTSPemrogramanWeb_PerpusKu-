@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel Admin - PerpusKu</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body data-page="admin">
+    <header class="site-header">
+      <nav class="container navbar" aria-label="Navigasi utama">
+        <a href="index.html" class="brand"
+          >Perpus<span>Ku</span> <small>Admin</small></a
+        >
+        <button class="nav-toggle" aria-label="Buka menu">&#9776;</button>
+        <ul class="nav-menu">
+          <li><a href="admin.html">Panel Admin</a></li>
+          <li><a href="katalog.html">Lihat Katalog</a></li>
+          <li><a href="login.html" class="btn btn-accent btn-sm">Keluar</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="section">
+      <div class="container">
+        <h1 class="section-title">Panel Admin</h1>
+
+        <section
+          class="grid grid-stats"
+          style="margin-bottom: 2rem"
+          aria-label="Ringkasan"
+        >
+          <div class="card stat-card">
+            <div class="num" id="stat-buku">0</div>
+            <div class="label">Total buku</div>
+          </div>
+          <div class="card stat-card">
+            <div class="num" id="stat-anggota">0</div>
+            <div class="label">Anggota</div>
+          </div>
+          <div class="card stat-card">
+            <div class="num" id="stat-transaksi">0</div>
+            <div class="label">Transaksi</div>
+          </div>
+        </section>
+
+        <div class="tabs" role="tablist">
+          <button class="tab-btn active" data-target="tab-buku" role="tab">
+            Kelola Buku
+          </button>
+          <button class="tab-btn" data-target="tab-anggota" role="tab">
+            Anggota
+          </button>
+          <button class="tab-btn" data-target="tab-transaksi" role="tab">
+            Transaksi
+          </button>
+        </div>
+
+        <section id="tab-buku" class="tab-panel active">
+          <p style="margin-bottom: 1rem">
+            <button class="btn" data-open-modal="modal-buku">
+              + Tambah Buku
+            </button>
+          </p>
+          <div class="card table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Judul</th>
+                  <th>Penulis</th>
+                  <th>Kategori</th>
+                  <th>Stok</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="admin-book-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="tab-anggota" class="tab-panel">
+          <div class="card table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nama</th>
+                  <th>NIM</th>
+                  <th>Email</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="admin-member-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="tab-transaksi" class="tab-panel">
+          <div class="card table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Judul</th>
+                  <th>Tgl Pinjam</th>
+                  <th>Jatuh Tempo</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="admin-loan-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Modal tambah buku -->
+    <div
+      id="modal-buku"
+      class="modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div class="modal">
+        <h2 id="modal-title">Tambah Buku</h2>
+        <form id="book-form" novalidate>
+          <div class="form-group">
+            <label for="b-judul">Judul</label>
+            <input type="text" id="b-judul" />
+            <div class="error-text"></div>
+          </div>
+          <div class="form-group">
+            <label for="b-penulis">Penulis</label>
+            <input type="text" id="b-penulis" />
+            <div class="error-text"></div>
+          </div>
+          <div class="form-group">
+            <label for="b-kategori">Kategori</label>
+            <select id="b-kategori">
+              <option>Novel</option>
+              <option>Teknologi</option>
+              <option>Sejarah</option>
+              <option>Pengembangan Diri</option>
+            </select>
+            <div class="error-text"></div>
+          </div>
+          <div class="form-group">
+            <label for="b-tipe">Tipe</label>
+            <select id="b-tipe">
+              <option value="ebook">E-Book</option>
+              <option value="fisik">Buku Fisik</option>
+            </select>
+            <div class="error-text"></div>
+          </div>
+          <div class="form-group">
+            <label for="b-tahun">Tahun Terbit</label>
+            <input type="number" id="b-tahun" />
+            <div class="error-text"></div>
+          </div>
+          <div class="form-group">
+            <label for="b-stok">Stok</label>
+            <input type="number" id="b-stok" min="0" />
+            <div class="error-text"></div>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-outline" data-close-modal>
+              Batal
+            </button>
+            <button type="submit" class="btn">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="container">
+        &copy; <span id="year"></span> PerpusKu - UTS Pemrograman Web,
+        Informatika UMM
+      </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/validation.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+  </body>
+</html>

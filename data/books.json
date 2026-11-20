@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "judul": "Laskar Pelangi",
+    "penulis": "Andrea Hirata",
+    "kategori": "Novel",
+    "tahun": 2005,
+    "tipe": "ebook",
+    "stok": 5,
+    "deskripsi": "Kisah perjuangan sekelompok anak di Belitung untuk mendapatkan pendidikan."
+  },
+  {
+    "id": 2,
+    "judul": "Bumi Manusia",
+    "penulis": "Pramoedya Ananta Toer",
+    "kategori": "Novel",
+    "tahun": 1980,
+    "tipe": "ebook",
+    "stok": 3,
+    "deskripsi": "Roman sejarah tentang Minke di masa kolonial Hindia Belanda."
+  },
+  {
+    "id": 3,
+    "judul": "Algoritma dan Pemrograman",
+    "penulis": "Rinaldi Munir",
+    "kategori": "Teknologi",
+    "tahun": 2016,
+    "tipe": "ebook",
+    "stok": 8,
+    "deskripsi": "Dasar-dasar algoritma dan logika pemrograman untuk pemula."
+  },
+  {
+    "id": 4,
+    "judul": "Pemrograman Web dengan PHP",
+    "penulis": "Abdul Kadir",
+    "kategori": "Teknologi",
+    "tahun": 2019,
+    "tipe": "ebook",
+    "stok": 6,
+    "deskripsi": "Panduan membuat aplikasi web dinamis menggunakan PHP."
+  },
+  {
+    "id": 5,
+    "judul": "Sejarah Indonesia Modern",
+    "penulis": "M.C. Ricklefs",
+    "kategori": "Sejarah",
+    "tahun": 2008,
+    "tipe": "fisik",
+    "stok": 2,
+    "deskripsi": "Ulasan menyeluruh sejarah Indonesia sejak 1200."
+  },
+  {
+    "id": 6,
+    "judul": "Filosofi Teras",
+    "penulis": "Henry Manampiring",
+    "kategori": "Pengembangan Diri",
+    "tahun": 2018,
+    "tipe": "ebook",
+    "stok": 4,
+    "deskripsi": "Pengenalan filsafat Stoa untuk kehidupan sehari-hari."
+  },
+  {
+    "id": 7,
+    "judul": "Basis Data",
+    "penulis": "Fathansyah",
+    "kategori": "Teknologi",
+    "tahun": 2015,
+    "tipe": "fisik",
+    "stok": 0,
+    "deskripsi": "Konsep perancangan dan implementasi basis data relasional."
+  },
+  {
+    "id": 8,
+    "judul": "Atomic Habits",
+    "penulis": "James Clear",
+    "kategori": "Pengembangan Diri",
+    "tahun": 2018,
+    "tipe": "ebook",
+    "stok": 7,
+    "deskripsi": "Cara membangun kebiasaan baik dan menghilangkan kebiasaan buruk."
+  }
+]

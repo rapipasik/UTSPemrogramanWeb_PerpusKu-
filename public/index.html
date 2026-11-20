@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PerpusKu - Sistem informasi peminjaman buku perpustakaan online">
+  <title>PerpusKu - Perpustakaan Digital</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="beranda">
+
+  <header class="site-header">
+    <nav class="container navbar" aria-label="Navigasi utama">
+      <a href="index.html" class="brand">Perpus<span>Ku</span></a>
+      <button class="nav-toggle" aria-label="Buka menu">&#9776;</button>
+      <ul class="nav-menu">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="katalog.html">Katalog</a></li>
+        <li><a href="login.html">Masuk</a></li>
+        <li><a href="register.html" class="btn btn-accent btn-sm">Daftar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Pinjam Buku Jadi Lebih Mudah</h1>
+        <p>Telusuri ribuan koleksi buku dan e-book, pinjam secara online, dan pantau peminjamanmu dari mana saja.</p>
+        <form id="hero-search-form" class="hero-search" role="search">
+          <label for="hero-q" class="sr-only" style="position:absolute;left:-9999px">Cari buku</label>
+          <input type="search" id="hero-q" placeholder="Cari judul atau penulis...">
+          <button type="submit" class="btn btn-accent">Cari</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Cara Meminjam</h2>
+        <div class="grid grid-stats">
+          <div class="card stat-card"><div class="num">1</div><div class="label">Daftar &amp; login sebagai anggota</div></div>
+          <div class="card stat-card"><div class="num">2</div><div class="label">Cari buku di katalog</div></div>
+          <div class="card stat-card"><div class="num">3</div><div class="label">Klik "Pinjam" pada halaman detail</div></div>
+          <div class="card stat-card"><div class="num">4</div><div class="label">Kembalikan sebelum jatuh tempo</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <h2 class="section-title">Buku Pilihan <small><a href="katalog.html">Lihat semua &rarr;</a></small></h2>
+        <div id="featured-books" class="grid grid-books"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">&copy; <span id="year"></span> PerpusKu - UTS Pemrograman Web, Informatika UMM</div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/katalog.js"></script>
+</body>
+</html>

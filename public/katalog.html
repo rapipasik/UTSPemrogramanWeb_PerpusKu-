@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katalog Buku - PerpusKu</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="katalog">
+
+  <header class="site-header">
+    <nav class="container navbar" aria-label="Navigasi utama">
+      <a href="index.html" class="brand">Perpus<span>Ku</span></a>
+      <button class="nav-toggle" aria-label="Buka menu">&#9776;</button>
+      <ul class="nav-menu">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="katalog.html">Katalog</a></li>
+        <li><a href="login.html">Masuk</a></li>
+        <li><a href="register.html" class="btn btn-accent btn-sm">Daftar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <h1 class="section-title">Katalog Buku <small id="result-count"></small></h1>
+
+      <form class="filter-bar" role="search" onsubmit="return false">
+        <div>
+          <label for="search">Cari</label>
+          <input type="search" id="search" placeholder="Judul atau penulis...">
+        </div>
+        <div>
+          <label for="filter-kategori">Kategori</label>
+          <select id="filter-kategori"><option value="">Semua kategori</option></select>
+        </div>
+        <div>
+          <label for="filter-tipe">Tipe</label>
+          <select id="filter-tipe">
+            <option value="">Semua tipe</option>
+            <option value="ebook">E-Book</option>
+            <option value="fisik">Buku Fisik</option>
+          </select>
+        </div>
+      </form>
+
+      <section id="book-grid" class="grid grid-books" aria-live="polite"></section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">&copy; <span id="year"></span> PerpusKu - UTS Pemrograman Web, Informatika UMM</div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/katalog.js"></script>
+</body>
+</html>
