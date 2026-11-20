@@ -73,11 +73,10 @@ function showAlert(el, message, type = "success") {
 
 // Render kartu buku (dipakai index.html & katalog.html)
 function renderBookCard(book) {
-  const emoji = COVER_EMOJI[book.kategori] || "📚";
   const available = book.stok > 0;
   return `
     <article class="card book-card">
-      <div class="book-cover" aria-hidden="true">${emoji}</div>
+      ${coverHTML(book)}
       <div class="card-body">
         <span class="badge">${book.kategori}</span>
         <h3>${book.judul}</h3>
@@ -93,4 +92,12 @@ function renderBookCard(book) {
         </div>
       </div>
     </article>`;
+}
+
+// Sampul buku bergaya tipografi; warna mengikuti kategori (lihat [data-cat] di style.css)
+function coverHTML(book) {
+  return `<div class="book-cover" data-cat="${book.kategori}" aria-hidden="true">
+    <span class="cover-title">${book.judul}</span>
+    <span class="cover-author">${book.penulis}</span>
+  </div>`;
 }
