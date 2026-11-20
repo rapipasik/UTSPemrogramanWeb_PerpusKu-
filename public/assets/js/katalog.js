@@ -71,7 +71,7 @@ function initDetail() {
   document.title = `${book.judul} - PerpusKu`;
   const available = book.stok > 0;
   box.innerHTML = `
-    <div class="book-cover" aria-hidden="true">${COVER_EMOJI[book.kategori] || "📚"}</div>
+    ${coverHTML(book)}
     <div>
       <span class="badge">${book.kategori}</span>
       <h1>${book.judul}</h1>

@@ -25,20 +25,27 @@
   <main>
     <section class="hero">
       <div class="container">
-        <h1>Pinjam Buku Jadi Lebih Mudah</h1>
-        <p>Telusuri ribuan koleksi buku dan e-book, pinjam secara online, dan pantau peminjamanmu dari mana saja.</p>
-        <form id="hero-search-form" class="hero-search" role="search">
-          <label for="hero-q" class="sr-only" style="position:absolute;left:-9999px">Cari buku</label>
-          <input type="search" id="hero-q" placeholder="Cari judul atau penulis...">
-          <button type="submit" class="btn btn-accent">Cari</button>
-        </form>
+        <div class="hero-copy">
+          <h1>Pinjam Buku Jadi Lebih Mudah</h1>
+          <p>Telusuri ribuan koleksi buku dan e-book, pinjam secara online, dan pantau peminjamanmu dari mana saja.</p>
+          <form id="hero-search-form" class="hero-search" role="search">
+            <label for="hero-q" class="sr-only">Cari buku</label>
+            <input type="search" id="hero-q" placeholder="Cari judul atau penulis...">
+            <button type="submit" class="btn btn-accent">Cari</button>
+          </form>
+        </div>
+        <div class="hero-shelf" aria-hidden="true">
+          <div class="book-cover" data-cat="Novel"><span class="cover-title">Laskar Pelangi</span><span class="cover-author">Andrea Hirata</span></div>
+          <div class="book-cover" data-cat="Teknologi"><span class="cover-title">Algoritma dan Pemrograman</span><span class="cover-author">Rinaldi Munir</span></div>
+          <div class="book-cover" data-cat="Sejarah"><span class="cover-title">Sejarah Indonesia Modern</span><span class="cover-author">M.C. Ricklefs</span></div>
+        </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
         <h2 class="section-title">Cara Meminjam</h2>
-        <div class="grid grid-stats">
+        <div class="grid grid-stats steps">
           <div class="card stat-card"><div class="num">1</div><div class="label">Daftar &amp; login sebagai anggota</div></div>
           <div class="card stat-card"><div class="num">2</div><div class="label">Cari buku di katalog</div></div>
           <div class="card stat-card"><div class="num">3</div><div class="label">Klik "Pinjam" pada halaman detail</div></div>
