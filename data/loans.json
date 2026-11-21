@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "id": 101,
+    "user_id": 1,
+    "book_id": 1,
+    "tgl_pinjam": "2026-11-10",
+    "jatuh_tempo": "2026-11-17",
+    "tgl_kembali": null,
+    "status": "dipinjam"
+  },
+  {
+    "id": 102,
+    "user_id": 1,
+    "book_id": 3,
+    "tgl_pinjam": "2026-11-15",
+    "jatuh_tempo": "2026-11-22",
+    "tgl_kembali": null,
+    "status": "dipinjam"
+  },
+  {
+    "id": 103,
+    "user_id": 1,
+    "book_id": 8,
+    "tgl_pinjam": "2026-10-01",
+    "jatuh_tempo": "2026-10-08",
+    "tgl_kembali": "2026-10-07",
+    "status": "dikembalikan"
+  }
+]

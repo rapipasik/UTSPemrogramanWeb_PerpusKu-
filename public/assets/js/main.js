@@ -3,19 +3,20 @@
    Pemilik: Anggota 1
    ========================================================== */
 
-// Data contoh sementara (nanti diganti fetch ke PHP / data/books.json)
-const DUMMY_BOOKS = [
-  { id: 1, judul: "Laskar Pelangi", penulis: "Andrea Hirata", kategori: "Novel", tahun: 2005, tipe: "ebook", stok: 5, deskripsi: "Kisah perjuangan sekelompok anak di Belitung untuk mendapatkan pendidikan." },
-  { id: 2, judul: "Bumi Manusia", penulis: "Pramoedya Ananta Toer", kategori: "Novel", tahun: 1980, tipe: "ebook", stok: 3, deskripsi: "Roman sejarah tentang Minke di masa kolonial Hindia Belanda." },
-  { id: 3, judul: "Algoritma dan Pemrograman", penulis: "Rinaldi Munir", kategori: "Teknologi", tahun: 2016, tipe: "ebook", stok: 8, deskripsi: "Dasar-dasar algoritma dan logika pemrograman untuk pemula." },
-  { id: 4, judul: "Pemrograman Web dengan PHP", penulis: "Abdul Kadir", kategori: "Teknologi", tahun: 2019, tipe: "ebook", stok: 6, deskripsi: "Panduan membuat aplikasi web dinamis menggunakan PHP." },
-  { id: 5, judul: "Sejarah Indonesia Modern", penulis: "M.C. Ricklefs", kategori: "Sejarah", tahun: 2008, tipe: "fisik", stok: 2, deskripsi: "Ulasan menyeluruh sejarah Indonesia sejak 1200." },
-  { id: 6, judul: "Filosofi Teras", penulis: "Henry Manampiring", kategori: "Pengembangan Diri", tahun: 2018, tipe: "ebook", stok: 4, deskripsi: "Pengenalan filsafat Stoa untuk kehidupan sehari-hari." },
-  { id: 7, judul: "Basis Data", penulis: "Fathansyah", kategori: "Teknologi", tahun: 2015, tipe: "fisik", stok: 0, deskripsi: "Konsep perancangan dan implementasi basis data relasional." },
-  { id: 8, judul: "Atomic Habits", penulis: "James Clear", kategori: "Pengembangan Diri", tahun: 2018, tipe: "ebook", stok: 7, deskripsi: "Cara membangun kebiasaan baik dan menghilangkan kebiasaan buruk." }
-];
-
 const COVER_EMOJI = { Novel: "📖", Teknologi: "💻", Sejarah: "🏛️", "Pengembangan Diri": "🌱" };
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+  })[char]);
+}
+
+async function apiFetch(url, options = {}) {
+  const response = await fetch(url, { credentials: "same-origin", ...options });
+  const payload = await response.json();
+  if (!response.ok) throw new Error(payload.message || "Terjadi kesalahan.");
+  return payload;
+}
 
 // ---------- Navbar mobile ----------
 document.addEventListener("DOMContentLoaded", () => {
@@ -33,6 +34,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initTabs();
   initModals();
+  document.querySelectorAll('a').forEach((link) => {
+    if (link.textContent.trim() === "Keluar") {
+      link.addEventListener("click", async (event) => {
+        event.preventDefault();
+        try {
+          await apiFetch("api/auth.php?action=logout", { method: "POST" });
+        } catch (_) {}
+        location.href = "login.html";
+      });
+    }
+  });
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 });
@@ -78,9 +90,9 @@ function renderBookCard(book) {
     <article class="card book-card">
       ${coverHTML(book)}
       <div class="card-body">
-        <span class="badge">${book.kategori}</span>
-        <h3>${book.judul}</h3>
-        <p class="author">${book.penulis} • ${book.tahun}</p>
+        <span class="badge">${escapeHTML(book.kategori)}</span>
+        <h3>${escapeHTML(book.judul)}</h3>
+        <p class="author">${escapeHTML(book.penulis)} • ${escapeHTML(book.tahun)}</p>
         <p>
           <span class="badge ${available ? "badge-success" : "badge-danger"}">
             ${available ? "Tersedia (" + book.stok + ")" : "Habis"}
@@ -96,8 +108,8 @@ function renderBookCard(book) {
 
 // Sampul buku bergaya tipografi; warna mengikuti kategori (lihat [data-cat] di style.css)
 function coverHTML(book) {
-  return `<div class="book-cover" data-cat="${book.kategori}" aria-hidden="true">
-    <span class="cover-title">${book.judul}</span>
-    <span class="cover-author">${book.penulis}</span>
+  return `<div class="book-cover" data-cat="${escapeHTML(book.kategori)}" aria-hidden="true">
+    <span class="cover-title">${escapeHTML(book.judul)}</span>
+    <span class="cover-author">${escapeHTML(book.penulis)}</span>
   </div>`;
 }

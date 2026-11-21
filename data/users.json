@@ -1,1 +1,22 @@
-[]
+[
+    {
+        "id": 1,
+        "nama": "Budi Santoso",
+        "nim": "202310370311001",
+        "email": "budi@mail.com",
+        "telepon": "081234567890",
+        "password": "$2y$10$O85D8hbA9i1KVFdpCsHQw.wLDPWuI6vRxfhiY8pedrl\/se4ayuJHO",
+        "role": "member",
+        "status": "aktif"
+    },
+    {
+        "id": 2,
+        "nama": "Administrator",
+        "nim": "ADMIN001",
+        "email": "admin@mail.com",
+        "telepon": "081234567891",
+        "password": "$2y$10$DOYpzP\/YHw0jtCi7.ITXCuMJJCZFc5GK3sBMoPSl18gwvlAwcekoi",
+        "role": "admin",
+        "status": "aktif"
+    }
+]

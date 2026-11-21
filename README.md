@@ -3,7 +3,7 @@
 Prototipe aplikasi web untuk **UTS Pemrograman Web** (Informatika UMM, Semester Ganjil 2026/2027).
 Front-end HTML/CSS/JS + backend **PHP 8.x OOP tanpa framework**.
 
-> Status: **Tahap 1 — Front-end mentahan.** Backend PHP (`src/`) masih kosong dan dikerjakan di tahap berikutnya.
+> Status: **Backend PHP OOP dan integrasi frontend telah tersedia.**
 
 ## Struktur Folder
 
@@ -34,19 +34,34 @@ perpustakaan-digital/
 └── README.md
 ```
 
-## Cara Menjalankan (tahap front-end)
+## Cara Menjalankan
 
-Cukup buka `public/index.html` di browser, atau dengan server bawaan PHP:
+1. Pastikan PHP 8.1 atau lebih baru sudah terpasang dan dapat dijalankan melalui terminal.
+2. Buka terminal pada folder proyek `perpustakaan-digital`.
+3. Jalankan server PHP dari folder `public`:
 
 ```bash
 cd public
 php -S localhost:8000
 ```
 
-lalu buka http://localhost:8000
+4. Buka `http://localhost:8000` pada browser.
+5. Pilih fitur yang ingin digunakan:
+   - Halaman beranda menampilkan buku pilihan dan pencarian.
+   - Menu **Katalog** menampilkan pencarian, filter kategori, dan tipe buku.
+   - Menu **Daftar** membuat akun member baru.
+   - Menu **Masuk** mengakses halaman dashboard atau panel admin.
+   - Anggota dapat meminjam buku, melihat riwayat peminjaman, dan mengembalikan buku.
+   - Admin dapat menambah atau menghapus buku serta melihat daftar anggota dan transaksi.
 
-Data buku saat ini masih **dummy** di `public/assets/js/main.js` (`DUMMY_BOOKS`).
-Akan diganti dengan `fetch()` ke backend PHP.
+Untuk pengujian cepat, gunakan akun bawaan berikut:
+
+| Peran | Email | Password |
+| --- | --- | --- |
+| Member | `budi@mail.com` | `password123` |
+| Admin | `admin@mail.com` | `admin123` |
+
+Frontend membaca data dari API PHP melalui `fetch()` dan menyimpan perubahan ke file JSON pada folder `data/`.
 
 ## Kebutuhan
 
@@ -55,10 +70,10 @@ Akan diganti dengan `fetch()` ke backend PHP.
 
 ## Tim
 
-| Nama | Fokus |
-|---|---|
-| Anggota 1 | Katalog & Buku |
-| Anggota 2 | Akun, Peminjaman & Admin |
+| Nama | NIM | Fokus |
+| --- | --- | --- |
+| Muhammad Rafif Al Hakim | 202410370110091 | Katalog & Buku |
+| Jatmiko Eka Pratama | 202410370110087 | Akun, Peminjaman & Admin |
 
 Detail tugas: lihat [JOBDESK.md](JOBDESK.md).
 
@@ -84,7 +99,7 @@ Lalu undang Anggota 2 di GitHub: **Settings → Collaborators → Add people**.
 
 ```bash
 git clone https://github.com/USERNAME/perpustakaan-digital.git
-cd perpustakaan-digital
+d
 ```
 
 ### Alur kerja harian (WAJIB agar tidak bentrok)
@@ -106,13 +121,13 @@ Kemudian buka **Pull Request** di GitHub, minta rekan satu tim me-review, lalu *
 
 ### Penamaan branch & commit
 
-| Awalan | Arti | Contoh |
-|---|---|---|
-| `feat:` | fitur baru | `feat: tambah class EBook` |
-| `fix:` | perbaikan bug | `fix: validasi NIM salah` |
-| `style:` | CSS / tampilan | `style: rapikan navbar mobile` |
-| `docs:` | dokumentasi | `docs: update README` |
-| `refactor:` | rapikan kode | `refactor: pisah Storage ke Core` |
+| Awalan      | Arti           | Contoh                            |
+| ----------- | -------------- | --------------------------------- |
+| `feat:`     | fitur baru     | `feat: tambah class EBook`        |
+| `fix:`      | perbaikan bug  | `fix: validasi NIM salah`         |
+| `style:`    | CSS / tampilan | `style: rapikan navbar mobile`    |
+| `docs:`     | dokumentasi    | `docs: update README`             |
+| `refactor:` | rapikan kode   | `refactor: pisah Storage ke Core` |
 
 Branch: `feat/<nama-fitur>`, `fix/<nama-bug>`.
 

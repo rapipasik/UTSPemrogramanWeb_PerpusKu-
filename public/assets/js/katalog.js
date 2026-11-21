@@ -12,9 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ---------- Beranda ----------
-function initBeranda() {
+async function initBeranda() {
   const grid = document.getElementById("featured-books");
-  grid.innerHTML = DUMMY_BOOKS.slice(0, 4).map(renderBookCard).join("");
+  try {
+    const payload = await apiFetch("api/books.php");
+    grid.innerHTML = payload.data.slice(0, 4).map(renderBookCard).join("");
+  } catch (error) {
+    grid.innerHTML = `<p>${escapeHTML(error.message)}</p>`;
+  }
 
   document.getElementById("hero-search-form").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -24,17 +29,23 @@ function initBeranda() {
 }
 
 // ---------- Katalog ----------
-function initKatalog() {
+async function initKatalog() {
   const grid = document.getElementById("book-grid");
   const search = document.getElementById("search");
   const kategori = document.getElementById("filter-kategori");
   const tipe = document.getElementById("filter-tipe");
   const count = document.getElementById("result-count");
 
-  // Isi opsi kategori otomatis dari data
-  [...new Set(DUMMY_BOOKS.map((b) => b.kategori))].forEach((k) => {
-    kategori.insertAdjacentHTML("beforeend", `<option value="${k}">${k}</option>`);
-  });
+  let books = [];
+  try {
+    const payload = await apiFetch("api/books.php");
+    books = payload.data;
+    [...new Set(books.map((b) => b.kategori))].forEach((k) => {
+      kategori.insertAdjacentHTML("beforeend", `<option value="${escapeHTML(k)}">${escapeHTML(k)}</option>`);
+    });
+  } catch (error) {
+    grid.innerHTML = `<p>${escapeHTML(error.message)}</p>`;
+  }
 
   // Ambil ?q= dari URL
   const q = new URLSearchParams(location.search).get("q");
@@ -42,7 +53,7 @@ function initKatalog() {
 
   function render() {
     const keyword = search.value.toLowerCase();
-    const result = DUMMY_BOOKS.filter((b) =>
+    const result = books.filter((b) =>
       (b.judul.toLowerCase().includes(keyword) || b.penulis.toLowerCase().includes(keyword)) &&
       (!kategori.value || b.kategori === kategori.value) &&
       (!tipe.value || b.tipe === tipe.value)
@@ -58,13 +69,15 @@ function initKatalog() {
 }
 
 // ---------- Detail ----------
-function initDetail() {
+async function initDetail() {
   const id = Number(new URLSearchParams(location.search).get("id"));
-  const book = DUMMY_BOOKS.find((b) => b.id === id);
   const box = document.getElementById("detail-box");
-
-  if (!book) {
-    box.innerHTML = `<p>Buku tidak ditemukan. <a href="katalog.html">Kembali ke katalog</a></p>`;
+  let book;
+  try {
+    const payload = await apiFetch(`api/books.php?id=${encodeURIComponent(id)}`);
+    book = payload.data;
+  } catch (error) {
+    box.innerHTML = `<p>${escapeHTML(error.message)} <a href="katalog.html">Kembali ke katalog</a></p>`;
     return;
   }
 
@@ -73,15 +86,15 @@ function initDetail() {
   box.innerHTML = `
     ${coverHTML(book)}
     <div>
-      <span class="badge">${book.kategori}</span>
-      <h1>${book.judul}</h1>
+      <span class="badge">${escapeHTML(book.kategori)}</span>
+      <h1>${escapeHTML(book.judul)}</h1>
       <ul class="detail-meta">
-        <li><strong>Penulis</strong> ${book.penulis}</li>
-        <li><strong>Tahun terbit</strong> ${book.tahun}</li>
+        <li><strong>Penulis</strong> ${escapeHTML(book.penulis)}</li>
+        <li><strong>Tahun terbit</strong> ${escapeHTML(book.tahun)}</li>
         <li><strong>Tipe</strong> ${book.tipe === "ebook" ? "E-Book" : "Buku Fisik"}</li>
-        <li><strong>Stok</strong> ${book.stok}</li>
+        <li><strong>Stok</strong> ${escapeHTML(book.stok)}</li>
       </ul>
-      <p>${book.deskripsi}</p>
+      <p>${escapeHTML(book.deskripsi)}</p>
       <div id="detail-alert" class="alert" role="alert"></div>
       <p style="margin-top:1.25rem">
         <button id="btn-pinjam" class="btn" ${available ? "" : "disabled"}>
@@ -91,9 +104,17 @@ function initDetail() {
       </p>
     </div>`;
 
-  document.getElementById("btn-pinjam")?.addEventListener("click", () => {
-    // TODO (tahap PHP): POST ke PeminjamanController
-    showAlert(document.getElementById("detail-alert"),
-      "Simulasi: permintaan peminjaman dikirim. (Belum terhubung backend)", "success");
+  document.getElementById("btn-pinjam")?.addEventListener("click", async () => {
+    try {
+      await apiFetch("api/loans.php?action=borrow", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ book_id: book.id })
+      });
+      showAlert(document.getElementById("detail-alert"), "Buku berhasil dipinjam.", "success");
+      setTimeout(() => location.href = "dashboard.html", 700);
+    } catch (error) {
+      showAlert(document.getElementById("detail-alert"), error.message, "danger");
+    }
   });
 }

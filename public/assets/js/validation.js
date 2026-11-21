@@ -58,10 +58,21 @@ document.addEventListener("DOMContentLoaded", () => {
         email: [Validator.required, Validator.email],
         password: [Validator.required, Validator.minLength(6)]
       },
-      () => {
-        // TODO (tahap PHP): kirim ke AuthController::login()
-        showAlert(document.getElementById("form-alert"), "Login valid (simulasi). Mengalihkan...", "success");
-        setTimeout(() => (location.href = "dashboard.html"), 900);
+      async () => {
+        try {
+          const payload = await apiFetch("api/auth.php?action=login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: loginForm.querySelector("#email").value,
+              password: loginForm.querySelector("#password").value
+            })
+          });
+          showAlert(document.getElementById("form-alert"), "Login berhasil. Mengalihkan...", "success");
+          setTimeout(() => (location.href = payload.data.role === "admin" ? "admin.html" : "dashboard.html"), 700);
+        } catch (error) {
+          showAlert(document.getElementById("form-alert"), error.message, "danger");
+        }
       }
     );
   }
@@ -83,10 +94,25 @@ document.addEventListener("DOMContentLoaded", () => {
           (v) => (v === pw.value ? "" : "Konfirmasi password tidak sama.")
         ]
       },
-      () => {
-        // TODO (tahap PHP): kirim ke AuthController::register()
-        showAlert(document.getElementById("form-alert"), "Pendaftaran valid (simulasi). Silakan login.", "success");
-        setTimeout(() => (location.href = "login.html"), 1200);
+      async () => {
+        try {
+          await apiFetch("api/auth.php?action=register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              nama: regForm.querySelector("#nama").value,
+              nim: regForm.querySelector("#nim").value,
+              email: regForm.querySelector("#email").value,
+              telepon: regForm.querySelector("#telepon").value,
+              password: regForm.querySelector("#password").value,
+              konfirmasi: regForm.querySelector("#konfirmasi").value
+            })
+          });
+          showAlert(document.getElementById("form-alert"), "Pendaftaran berhasil. Silakan login.", "success");
+          setTimeout(() => (location.href = "login.html"), 900);
+        } catch (error) {
+          showAlert(document.getElementById("form-alert"), error.message, "danger");
+        }
       }
     );
   }
